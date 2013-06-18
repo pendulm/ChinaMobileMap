@@ -1,0 +1,9 @@
+select tmp.publisher_id as u1, w.publisher_id as u2, tmp.month as month
+    from 
+    (select u.publisher_id, c.blog_id, c.month
+        from user as u, roller_comment as c
+        where u.login_name == c.commenter_name
+    ) as tmp,
+    weblogentry as w 
+where w.blog_id == tmp.blog_id
+order by u1, u2, month;

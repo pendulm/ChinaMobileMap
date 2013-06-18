@@ -1,0 +1,9 @@
+select tmp.commenter_name as u1, u.login_name as u2, tmp.month as month, count(*)
+    from 
+    (select c.commenter_name, w.publisher_id, c.month
+        from weblogentry as w, roller_comment as c
+        where w.blog_id == c.blog_id
+    ) as tmp,
+    user as u 
+where u.publisher_id == tmp.publisher_id
+group by u1, u2, month;
